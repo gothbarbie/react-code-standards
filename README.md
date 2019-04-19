@@ -6,7 +6,7 @@
 
 2. Never use reserved words such as `export`, `for`, `const`, `let`, `var`, `await`, `async` as they will cause conflicts.
 
-## Gotcha's
+## Some Gotcha's
 
 ### prevState
 
@@ -16,7 +16,7 @@ However, when you change based on an existing state value (inverting a boolean f
 
 **Correct**:
 
-```
+```javascript
 this.setState(prevState => ({
   isOpen: !prevState.isOpen,
 }))
@@ -24,7 +24,7 @@ this.setState(prevState => ({
 
 **Incorrect**:
 
-```
+```javascript
 this.setState(prevState => ({
   ...prevState,
   isOpen: !this.state.isOpen,
@@ -39,9 +39,33 @@ Older browsers will not work well with clickable `div`s and also you can't navig
 
 ## Destructuring
 
+If you know a variable will always contain certain properties, you can use destructuring to simplify your code:
+
+**Correct**:
+
+```javascript
+const mapStateToProps = ({ user, items }) => ({
+  user,
+  items,
+})
+```
+
+**Incorrect**:
+
+```javascript
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    items: state.user,
+  }
+}
+```
+
 ## Semantic HTML
 
-With HTML5 there was a bunch of alternatives to `div` added, such as `section`, `article`, `header`, and `footer` added. Using these makes it easier to identify component in the final HTML.
+With HTML5 there was a bunch of alternatives to `div` added, such as `section`, `article`, `header`, and `footer` added.
+
+**Using these makes it easier to identify a component in the final HTML.**
 
 ## Reducers
 
@@ -49,7 +73,7 @@ Avoid nested reducers. It makes for more complicated look-ups and unnecessary co
 
 **Correct**:
 
-```
+```javascript
 const initialState = {
   // props goes here
 }
@@ -57,11 +81,11 @@ const initialState = {
 
 **Incorrect**:
 
-```
+```javascript
 const initialState = {
-  nameOfReducer:  {
+  nameOfReducer: {
     // props goes here
-  }
+  },
 }
 ```
 
